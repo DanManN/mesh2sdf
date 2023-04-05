@@ -5,7 +5,7 @@ import skimage.measure
 import mesh2sdf.core
 
 
-def compute(vertices: np.ndarray, faces: np.ndarray, size: int = 128,
+def compute(vertices: np.ndarray, faces: np.ndarray, size: list = [128,128,128],
             fix: bool = False, level: float = 0.015, return_mesh: bool = False):
   r''' Converts a input mesh to signed distance field (SDF).
 
@@ -22,7 +22,7 @@ def compute(vertices: np.ndarray, faces: np.ndarray, size: int = 128,
   '''
 
   # compute sdf
-  sdf = mesh2sdf.core.compute(vertices, faces, size)
+  sdf = mesh2sdf.core.compute(vertices, faces, *size)
   if not fix:
     return (sdf, trimesh.Trimesh(vertices, faces)) if return_mesh else sdf
 
